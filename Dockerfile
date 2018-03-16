@@ -13,3 +13,10 @@ COPY --from=0 /usr/local/lib/libdarknet.a /usr/local/lib/
 COPY --from=0 /usr/local/include/darknet.h /usr/local/include/
 
 RUN sh -c "echo '/usr/local/lib' >> /etc/ld.so.conf" RUN ldconfig
+
+# Install Go
+RUN curl -L https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz | tar -C /usr/local -xzf - && \ 
+    mkdir /go
+# Set environment variables for go
+ENV GOPATH=/go GOROOT=/usr/local/go
+ENV PATH $PATH:$GOROOT/bin:$GOPATH/bin
