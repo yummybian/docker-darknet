@@ -23,7 +23,7 @@ RUN sh -c "echo '/usr/local/lib' >> /etc/ld.so.conf" RUN ldconfig
 #     mkdir /go
 
 # Install Go
-COPY --from=golang:1.9.4 /usr/local/go /usr/local
+COPY --from=golang:1.9.4 /usr/local/go /usr/local/go
 RUN mkdir /go
 # Set environment variables for go
 ENV GOPATH=/go GOROOT=/usr/local/go
