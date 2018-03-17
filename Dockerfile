@@ -2,7 +2,7 @@ FROM yummybian/docker-gpu-opencv-ubuntu:devel
 
 MAINTAINER yummy.bian@gmail.com
 
-ENV GO_VERSION 1.9.2
+ENV GO_VERSION 1.9.4
 
 # Install Darknet
 WORKDIR /darknet
@@ -17,8 +17,14 @@ COPY --from=0 /usr/local/include/darknet.h /usr/local/include/
 RUN sh -c "echo '/usr/local/lib' >> /etc/ld.so.conf" RUN ldconfig
 
 # Install Go
-RUN wget -qO- https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz | tar -C /usr/local -xzf - && \
-    mkdir /go
+# RUN wget -O go.tgz https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz && \
+#     tar -C /usr/local -xzf go.tgz && \
+#     rm go.tgz && \
+#     mkdir /go
+
+# Install Go
+COPY --from=golang:1.9.4 /usr/local/go /usr/local
+RUN mkdir /go
 # Set environment variables for go
 ENV GOPATH=/go GOROOT=/usr/local/go
 ENV PATH $PATH:$GOROOT/bin:$GOPATH/bin
