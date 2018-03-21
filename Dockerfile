@@ -1,7 +1,5 @@
 FROM yummybian/docker-gpu-opencv-ubuntu:devel
 
-ENV GO_VERSION 1.9.2
-
 MAINTAINER yummy.bian@gmail.com
 
 ENV GO_VERSION 1.9.2
