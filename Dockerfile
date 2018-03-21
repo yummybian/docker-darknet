@@ -1,11 +1,12 @@
 FROM yummybian/docker-gpu-opencv-ubuntu:devel
 
+ENV GO_VERSION 1.9.2
+
 MAINTAINER yummy.bian@gmail.com
 
 ENV GO_VERSION 1.9.2
 
 # Install Darknet
-WORKDIR /darknet
 RUN git clone --depth=1 https://github.com/ZanLabs/darknet.git && \
     cd darknet && make OPENCV=1 GPU=1 CUDNN=1 && make install && \
     cd .. && rm -rf darknet
